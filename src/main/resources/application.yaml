@@ -7,20 +7,18 @@ spring:
     generate-ddl: true
     hibernate:
       ddl-auto: update
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
+      jdbc.lob.non_contextual_creation: true
 
   datasource:
-    platform: postgres
-    url: jdbc:postgresql://localhost:5433/telegram
-    username: postgres
-    password: Upiver88
+    url: jdbc:mysql://localhost:3306/telegram
+    username: root
+    password: upiver88
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
   telegrambot:
     botUserName: '@travel1ing_bot'
     botToken: 1383524175:AAGWhBL6RMB3XXhPCMCsCC5PAH2pQoKa13A
-    webHookPath:  https://061c5456d453.ngrok.io
+    webHookPath:  https://eab0e81440d6.ngrok.io
 
     proxyType: SOCKS5
     proxyHost: localhost

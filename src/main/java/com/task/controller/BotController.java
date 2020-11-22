@@ -12,14 +12,16 @@ import org.springframework.web.bind.annotation.RestController;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
+import java.io.IOException;
+
 @RestController
-@RequiredArgsConstructor(onConstructor_ = {@Autowired})
+@RequiredArgsConstructor
 @RequestMapping(value = "/")
 public class BotController {
     private final TelegramService telegramService;
 
     @PostMapping
-    public ResponseEntity<?> onUpdateReceived(@RequestBody Update update) throws TelegramApiException {
+    public ResponseEntity<?> onUpdateReceived(@RequestBody Update update) throws TelegramApiException, IOException {
         telegramService.onWebhookUpdateReceived(update);
         return ResponseEntity.ok(HttpStatus.NO_CONTENT);
     }
