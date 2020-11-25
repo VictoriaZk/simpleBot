@@ -23,7 +23,6 @@ public class Country {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "country")
     private Set<City> city;
 
-    @OneToOne
-    @JoinColumn(name = "statasticId")
+    @OneToOne(mappedBy = "country")
     private Statistic statistic;
 }

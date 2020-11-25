@@ -20,7 +20,7 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class TelegramService {
     private static final int CONNECTION_TIMEOUT = 10000;
-    private final CityRepository cityRepository;
+    private final CityService cityService;
     private final TravelBot travelBot;
 
     public void onWebhookUpdateReceived(Update update) throws TelegramApiException, IOException {
@@ -32,7 +32,7 @@ public class TelegramService {
         } else if (Objects.nonNull(update.getMessage()) && update.getMessage().hasText()) {
             Long chatId = update.getMessage().getChatId();
             String name = update.getMessage().getText();
-            String cityDescription = cityRepository.findDescriptionByName(name).orElse(Message.APOLOGIZE_MESSAGE.getApologizeMessage());
+            String cityDescription = cityService.getInformation(name);
 
             try {
                 travelBot.execute(new SendMessage(chatId, cityDescription));

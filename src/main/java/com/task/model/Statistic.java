@@ -22,7 +22,7 @@ public class Statistic {
     @Column(name = "quarantine")
     private Boolean isQuarantineNeeded;
 
-    @OneToOne
-    @JoinColumn(name = "countryId")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "country_id", referencedColumnName = "id")
     private Country country;
 }

@@ -5,8 +5,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
+import java.util.Optional;
+
 public interface StatisticRepository extends JpaRepository<Statistic, Long> {
     @Modifying
     @Query("UPDATE Statistic s SET s.amount = ?2, s.isQuarantineNeeded = ?3 WHERE s.id = ?1")
     void updateStatistic(Long id, Integer amount, Boolean quarantine);
+
+    @Query("SELECT s FROM Statistic s WHERE s.country.id = ?1")
+    Optional<Statistic> findByCountryId(Long id);
 }

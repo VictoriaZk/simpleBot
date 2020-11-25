@@ -19,66 +19,6 @@
             <li class="nav-item">
                 <a class="nav-link" href="/">Home</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="modal" data-target="#myModal">Add</a>
-                <!-- The Modal -->
-                <div class="modal fade" id="myModal">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-
-                            <!-- Modal Header -->
-                            <div class="modal-header">
-                                <h4 class="modal-title">Adding</h4>
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            </div>
-
-                            <!-- Modal body -->
-                            <div class="modal-body">
-                                <form action="/cities/add" method="post">
-                                    <div class="input-group mb-3 input-group-sm">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">Country</span>
-                                        </div>
-                                        <input type="text" name="country" class="form-control">
-                                    </div>
-                                    <div class="input-group mb-3 input-group-sm">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">Name</span>
-                                        </div>
-                                        <input type="text" name="name" class="form-control">
-                                    </div>
-                                    <div class="input-group mb-3 input-group-sm">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">Description</span>
-                                        </div>
-                                        <input type="text" name="description" class="form-control">
-                                    </div>
-                                    <div class="input-group mb-3 input-group-sm">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">Recommend to visit</span>
-                                        </div>
-                                        <input type="text" name="recommendToVisit" class="form-control">
-                                    </div>
-                                    <div class="input-group mb-3 input-group-sm">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">Don't recommend to visit</span>
-                                        </div>
-                                        <input type="text" name="notRecommendToVisit" class="form-control">
-                                    </div>
-                                    <!-- Modal footer -->
-                                    <div class="modal-footer">
-                                        <button class="btn btn-outline-success p-2" type="submit">Save</button>
-                                    </div>
-                                </form>
-                            </div>
-
-
-                        </div>
-                    </div>
-                </div>
-            </li>
-            </li>
-            </li>
         </ul>
     </div>
 </nav>
@@ -104,7 +44,63 @@
                 <td>${city.notRecommendToVisit}</td>
                 <td>${city.country.name}</td>
                 <td>
-                    <a class="nav-link" data-toggle="modal" data-target="#reduct${city.id}">Update</a>
+                    <a class="badge badge-info" data-toggle="modal" data-target="#myModal">Add</a>
+                    <!-- The Modal -->
+                    <div class="modal fade" id="myModal">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Adding</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+
+                                <!-- Modal body -->
+                                <div class="modal-body">
+                                    <form action="/cities/add" method="post">
+                                        <div class="input-group mb-3 input-group-sm">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Country</span>
+                                            </div>
+                                            <input type="text" name="country" class="form-control">
+                                        </div>
+                                        <div class="input-group mb-3 input-group-sm">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Name</span>
+                                            </div>
+                                            <input type="text" name="name" class="form-control">
+                                        </div>
+                                        <div class="input-group mb-3 input-group-sm">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Description</span>
+                                            </div>
+                                            <input type="text" name="description" class="form-control">
+                                        </div>
+                                        <div class="input-group mb-3 input-group-sm">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Recommend to visit</span>
+                                            </div>
+                                            <input type="text" name="recommendToVisit" class="form-control">
+                                        </div>
+                                        <div class="input-group mb-3 input-group-sm">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Don't recommend to visit</span>
+                                            </div>
+                                            <input type="text" name="notRecommendToVisit" class="form-control">
+                                        </div>
+                                        <!-- Modal footer -->
+                                        <div class="modal-footer">
+                                            <button class="btn btn-outline-success p-2" type="submit">Save</button>
+                                        </div>
+                                    </form>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <a class="badge badge-success" data-toggle="modal" data-target="#reduct${city.id}">Update</a>
                     <!-- The Modal -->
                     <div class="modal fade" id="reduct${city.id}">
                         <div class="modal-dialog">
@@ -158,7 +154,7 @@
                             </div>
                         </div>
                     </div>
-                    <a class="nav-link" href="/cities/delete/${city.id}">Delete</a>
+                    <a href="/cities/delete/${city.id}" class="badge badge-danger">Delete</a>
                 </td>
             </tr>
         </#list>

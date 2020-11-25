@@ -5,10 +5,10 @@ public enum Message {
     HELLO_MESSAGE;
 
     public String getApologizeMessage() {
-        return "We are sorry, but now we haven't any information about this city. We try to add information later!";
+        return "Приносим наши извинения, на данный момент в нашей базе нет информации по вашему городуБ но в ближайшее время мы его обязательно добавим. До скорых встреч!";
     }
 
     public String getHelloMessage() {
-        return "hello! Nice to meet you on this chat. Let's start! Choose the city and i'll give you information about it.";
+        return ",здравствуйте! Рады привестствовать вас в нашем приложении, давай начнем: введите город, в который планируете поехать.";
     }
 }

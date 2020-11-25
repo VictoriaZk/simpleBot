@@ -10,12 +10,12 @@ spring:
     generate-ddl: true
     hibernate:
       ddl-auto: update
-      jdbc.lob.non_contextual_creation: true
+    database: mysql
 
   datasource:
     url: jdbc:mysql://localhost:3306/telegram
     username: root
-    password: upiver88
+    password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   telegrambot:

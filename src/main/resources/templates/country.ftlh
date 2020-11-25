@@ -19,44 +19,6 @@
             <li class="nav-item">
                 <a class="nav-link" href="/">Home</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="modal" data-target="#myModal">Add</a>
-                <!-- The Modal -->
-                <form action="/countries/add" method="post">
-                    <div class="modal fade" id="myModal">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-
-                                <!-- Modal Header -->
-                                <div class="modal-header">
-                                    <h4 class="modal-title">Adding</h4>
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                </div>
-
-                                <!-- Modal body -->
-                                <div class="modal-body">
-                                    <form>
-                                        <div class="input-group mb-3 input-group-sm">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">Name</span>
-                                            </div>
-                                            <input type="text" name="name" class="form-control">
-                                        </div>
-                                    </form>
-                                </div>
-
-                                <!-- Modal footer -->
-                                <div class="modal-footer">
-                                    <button class="btn btn-outline-success p-2" type="submit">Save</button>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </li>
-            </li>
-            </li>
         </ul>
     </div>
 </nav>
@@ -74,7 +36,41 @@
             <tr class="text-left">
                 <td>${country.name}</td>
                 <td>
-                    <a class="nav-link" data-toggle="modal" data-target="#update${country.id}">Update</a>
+                    <a class="badge badge-info" data-toggle="modal" data-target="#myModal">Add</a>
+                    <!-- The Modal -->
+                    <form action="/countries/add" method="post">
+                        <div class="modal fade" id="myModal">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+
+                                    <!-- Modal Header -->
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Adding</h4>
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    </div>
+
+                                    <!-- Modal body -->
+                                    <div class="modal-body">
+                                        <form>
+                                            <div class="input-group mb-3 input-group-sm">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">Name</span>
+                                                </div>
+                                                <input type="text" name="name" class="form-control">
+                                            </div>
+                                        </form>
+                                    </div>
+
+                                    <!-- Modal footer -->
+                                    <div class="modal-footer">
+                                        <button class="btn btn-outline-success p-2" type="submit">Save</button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <a class="badge badge-success" data-toggle="modal" data-target="#update${country.id}">Update</a>
                     <!-- The Modal -->
                     <form action="/countries/update/${country.id}" method="post">
                         <div class="modal fade" id="update${country.id}">
@@ -109,7 +105,7 @@
                             </div>
                         </div>
                     </form>
-                    <a class="nav-link" href="/countries/delete/${country.id}">Delete</a>
+                    <a href="/countries/delete/${country.id}" class="badge badge-danger">Delete</a>
                 </td>
             </tr>
         </#list>

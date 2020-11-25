@@ -1,19 +1,24 @@
 package com.task.service;
 
-import com.task.exception.ObjectNotFoundException;
 import com.task.mapper.CityMapper;
 import com.task.model.City;
 import com.task.model.Country;
+import com.task.model.Message;
+import com.task.model.Statistic;
 import com.task.model.dto.CityResponse;
 import com.task.model.dto.CreateCityRequest;
 import com.task.model.dto.UpdateCityRequest;
 import com.task.repository.CityRepository;
 import com.task.repository.CountryRepository;
+import com.task.repository.StatisticRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -21,7 +26,17 @@ import java.util.stream.Collectors;
 public class CityService {
     private final CountryRepository countryRepository;
     private final CityRepository cityRepository;
+    private final StatisticRepository statisticRepository;
     private final CityMapper cityMapper;
+
+    public String getInformation(String cityName) {
+        City city = cityRepository.findByName(cityName).orElse(null);
+        if (Objects.nonNull(city)) {
+            return getMessage(city);
+        } else {
+            return Message.APOLOGIZE_MESSAGE.getApologizeMessage();
+        }
+    }
 
     public List<CityResponse> getAll() {
         return cityRepository.findAll().stream()
@@ -57,6 +72,36 @@ public class CityService {
 
     private Country getCountryByName(String name) {
         return countryRepository.findByName(name)
-                .orElse(countryRepository.save(Country.builder().name(name).build()));
+                .orElseGet(() -> countryRepository.save(Country.builder().name(name).build()));
+    }
+
+    private String getMessage(City city) {
+        String country = "";
+        String amount = "";
+        String quarantine = "";
+        String cityDescription = city.getDescription();
+        String recommend = "Некоторые факты и рекомендации: " + city.getRecommendToVisit();
+        String notRecommend = "Также мы собрали негативные отзывы о некоторых местах: " + city.getNotRecommendToVisit();
+        List<String> hotels = new ArrayList<>();
+
+        city.getHotels().forEach(hotel -> {
+            hotels.add("Отель:" + hotel.getName() + "," + "количество звезд: " + hotel.getAmountOfStars());
+        });
+
+        Optional<Statistic> statisticOptional = statisticRepository.findByCountryId(city.getCountry().getId());
+
+        if (statisticOptional.isPresent()) {
+            Statistic statistic = statisticOptional.get();
+            country = "Город " + city.getName() + "принадлежит стране " + statistic.getCountry().getName();
+            amount = "На данный момент количество зараженных в стране " + statistic.getAmount().toString();
+            quarantine = "По приезду вам " + ((statistic.getIsQuarantineNeeded()) ? "необходимо будет соблюдать 14-дневный карантин."
+                    : "не нужно отбывать карантин, но все же помните о своем здоровье и здоровье окружающих, носите маску!");
+        }
+
+        //отели сделать цену за сутки и сделать через запятую
+        //в статистике добавить кол-во зараженных за сутки
+        return city.getName() + "/n" + cityDescription + "/n" + recommend + "/n" + notRecommend + "/n" +
+                "Список отелей, в которых вы можете остановиться" + hotels + "/n" +
+                country + ". " + amount + ". " + quarantine + ". " ;
     }
 }
