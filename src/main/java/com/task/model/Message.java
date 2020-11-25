@@ -1,4 +1,4 @@
-package com.task.exception;
+package com.task.model;
 
 public enum Message {
     APOLOGIZE_MESSAGE,

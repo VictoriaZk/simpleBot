@@ -12,6 +12,9 @@ public interface CityRepository extends JpaRepository<City, Long> {
     Optional<String> findDescriptionByName(String name);
 
     @Modifying
-    @Query("UPDATE City c SET c.description = ?2 WHERE c.id = ?1")
-    void updateDescription(Long id, String newDescription);
+    @Query("UPDATE City c SET c.description = ?2, c.name = ?3, " +
+            "c.recommendToVisit = ?4, c.notRecommendToVisit = ?5 WHERE c.id = ?1")
+    void updateCty(Long id, String newDescription, String name, String recommend, String notRecommend);
+
+    Optional<City> findByName(String name);
 }

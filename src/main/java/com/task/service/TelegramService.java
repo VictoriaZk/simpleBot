@@ -1,9 +1,8 @@
-package com.task.service.impl.impl;
+package com.task.service;
 
-import com.task.exception.Message;
+import com.task.model.Message;
 import com.task.model.TravelBot;
 import com.task.repository.CityRepository;
-import com.task.service.impl.TelegramService;
 import lombok.RequiredArgsConstructor;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
@@ -19,12 +18,11 @@ import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
-public class TelegramServiceImpl implements TelegramService {
+public class TelegramService {
     private static final int CONNECTION_TIMEOUT = 10000;
     private final CityRepository cityRepository;
     private final TravelBot travelBot;
 
-    @Override
     public void onWebhookUpdateReceived(Update update) throws TelegramApiException, IOException {
         Voice voice = update.getMessage().getVoice();
         if(voice != null){

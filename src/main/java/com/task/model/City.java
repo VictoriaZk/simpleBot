@@ -5,13 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.Set;
 
 @Data
 @Builder
@@ -21,8 +16,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "CITY")
 public class City {
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CITY_ID_SEQ")
-    @SequenceGenerator(name = "CITY_ID_SEQ", sequenceName = "CITY_ID_SEQ")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long id;
 
@@ -31,4 +25,17 @@ public class City {
 
     @Column(columnDefinition = "text")
     private String description;
+
+    @Column(name = "recommend", columnDefinition = "text")
+    private String recommendToVisit;
+
+    @Column(name = "not_recommend", columnDefinition = "text")
+    private String notRecommendToVisit;
+
+    @ManyToOne(cascade = CascadeType.REFRESH)
+    @JoinColumn(name = "countryId")
+    private Country country;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "city")
+    private Set<Hotel> hotels;
 }

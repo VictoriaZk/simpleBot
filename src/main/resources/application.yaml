@@ -1,7 +1,10 @@
 server:
   port: 5000
 
+
 spring:
+  freemarker:
+    expose-request-attributes: true
 
   jpa:
     generate-ddl: true
