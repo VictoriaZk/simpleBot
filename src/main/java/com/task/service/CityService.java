@@ -106,8 +106,8 @@ public class CityService {
 
         //отели сделать цену за сутки и сделать через запятую
         //в статистике добавить кол-во зараженных за сутки
-        return city.getName() + "/n" + cityDescription + "/n" + recommend + "/n" + notRecommend + "/n" +
-                "Список отелей, в которых вы можете остановиться" + hotels + "/n" +
+        return city.getName() + "\n" + cityDescription + "\n" + recommend + "\n" + notRecommend + "\n" +
+                "Список отелей, в которых вы можете остановиться: Семашко 5* 30$ сутки, Гродно 4* 20$ сутки, Беларусь 3* 10$ сутки" + "\n" +
                 country + ". " + amount + ". " + quarantine + ". " ;
     }
 
