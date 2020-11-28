@@ -8,7 +8,10 @@ import javax.validation.constraints.NotNull;
 @Data
 public class CreateStatisticRequest {
     @NotNull
-    private Integer amount;
+    private Long amount;
+
+    @NotNull
+    private Integer day;
 
     @NotNull
     private Boolean isQuarantineNeeded;

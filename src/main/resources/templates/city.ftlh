@@ -17,9 +17,42 @@
         <ul class="navbar-nav">
             <li class="nav-item">
             <li class="nav-item">
-                <a class="nav-link" href="/">Home</a>
+                <a class="nav-link" href="/">Главная</a>
             </li>
         </ul>
+        <a class="nav-link" data-toggle="modal" data-target="#plan">Пожелания пользователей</a>
+        <div class="modal fade" id="plan">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Список городов</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <table class="table table-hover table-light">
+                            <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Название</th>
+                                <th scope="col">Количество запросов пользователей</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <#list plans as plan>
+                            <tr class="text-left">
+                                <td>${plan.name}</td>
+                                <td>${plan.amountOfRequests}</td>
+                            </tr>
+                        </#list>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </nav>
 <br>
@@ -27,12 +60,12 @@
     <table class="table table-hover table-light">
         <thead class="thead-dark">
         <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Description</th>
-            <th scope="col">Recommend to visit</th>
-            <th scope="col">Don't recommend to visit</th>
-            <th scope="col">Country</th>
-            <th scope="col">Action</th>
+            <th scope="col">Название</th>
+            <th scope="col">Описание</th>
+            <th scope="col">Стоит посетить</th>
+            <th scope="col">Негативные отзывы</th>
+            <th scope="col">Страна</th>
+            <th scope="col">Выполнить</th>
         </tr>
         </thead>
         <tbody>
@@ -44,63 +77,7 @@
                 <td>${city.notRecommendToVisit}</td>
                 <td>${city.country.name}</td>
                 <td>
-                    <a class="badge badge-info" data-toggle="modal" data-target="#myModal">Add</a>
-                    <!-- The Modal -->
-                    <div class="modal fade" id="myModal">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-
-                                <!-- Modal Header -->
-                                <div class="modal-header">
-                                    <h4 class="modal-title">Adding</h4>
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                </div>
-
-                                <!-- Modal body -->
-                                <div class="modal-body">
-                                    <form action="/cities/add" method="post">
-                                        <div class="input-group mb-3 input-group-sm">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">Country</span>
-                                            </div>
-                                            <input type="text" name="country" class="form-control">
-                                        </div>
-                                        <div class="input-group mb-3 input-group-sm">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">Name</span>
-                                            </div>
-                                            <input type="text" name="name" class="form-control">
-                                        </div>
-                                        <div class="input-group mb-3 input-group-sm">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">Description</span>
-                                            </div>
-                                            <input type="text" name="description" class="form-control">
-                                        </div>
-                                        <div class="input-group mb-3 input-group-sm">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">Recommend to visit</span>
-                                            </div>
-                                            <input type="text" name="recommendToVisit" class="form-control">
-                                        </div>
-                                        <div class="input-group mb-3 input-group-sm">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">Don't recommend to visit</span>
-                                            </div>
-                                            <input type="text" name="notRecommendToVisit" class="form-control">
-                                        </div>
-                                        <!-- Modal footer -->
-                                        <div class="modal-footer">
-                                            <button class="btn btn-outline-success p-2" type="submit">Save</button>
-                                        </div>
-                                    </form>
-                                </div>
-
-
-                            </div>
-                        </div>
-                    </div>
-                    <a class="badge badge-success" data-toggle="modal" data-target="#reduct${city.id}">Update</a>
+                    <a class="badge badge-success" data-toggle="modal" data-target="#reduct${city.id}">Обновить</a>
                     <!-- The Modal -->
                     <div class="modal fade" id="reduct${city.id}">
                         <div class="modal-dialog">
@@ -108,7 +85,7 @@
 
                                 <!-- Modal Header -->
                                 <div class="modal-header">
-                                    <h4 class="modal-title">Updating</h4>
+                                    <h4 class="modal-title">Обновление</h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 </div>
 
@@ -117,35 +94,35 @@
                                     <form action="/cities/update/${city.id}" method="post">
                                         <div class="input-group mb-3 input-group-sm">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text">Name</span>
+                                                <span class="input-group-text">Название</span>
                                             </div>
                                             <input type="text" name="name" value="${city.name}"
                                                    class="form-control">
                                         </div>
                                         <div class="input-group mb-3 input-group-sm">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text">Description</span>
+                                                <span class="input-group-text">Описание</span>
                                             </div>
                                             <input type="text" name="description" value="${city.description}"
                                                    class="form-control">
                                         </div>
                                         <div class="input-group mb-3 input-group-sm">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text">Recommend to visit</span>
+                                                <span class="input-group-text">Стоит посетить</span>
                                             </div>
                                             <input type="text" name="recommendToVisit" value="${city.recommendToVisit}"
                                                    class="form-control">
                                         </div>
                                         <div class="input-group mb-3 input-group-sm">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text">Don't recommend to visit</span>
+                                                <span class="input-group-text">Негативные отзывы</span>
                                             </div>
                                             <input type="text" name="notRecommendToVisit" value="${city.notRecommendToVisit}"
                                                    class="form-control">
                                         </div>
                                         <!-- Modal footer -->
                                         <div class="modal-footer">
-                                            <button class="btn btn-outline-success p-2" type="submit">Update</button>
+                                            <button class="btn btn-outline-success p-2" type="submit">Сохранить</button>
                                         </div>
                                     </form>
                                 </div>
@@ -154,12 +131,66 @@
                             </div>
                         </div>
                     </div>
-                    <a href="/cities/delete/${city.id}" class="badge badge-danger">Delete</a>
+                    <a href="/cities/delete/${city.id}" class="badge badge-danger">Удалить</a>
                 </td>
             </tr>
         </#list>
         </tbody>
     </table>
+    <a class="btn btn-default btn-lg btn-block" data-toggle="modal" data-target="#myModal">Добавить новый город</a>
+    <!-- The Modal -->
+    <div class="modal fade" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Добавление</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <form action="/cities/add" method="post">
+                        <div class="input-group mb-3 input-group-sm">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Страна</span>
+                            </div>
+                            <input type="text" name="country" class="form-control">
+                        </div>
+                        <div class="input-group mb-3 input-group-sm">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Название</span>
+                            </div>
+                            <input type="text" name="name" class="form-control">
+                        </div>
+                        <div class="input-group mb-3 input-group-sm">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Описание</span>
+                            </div>
+                            <input type="text" name="description" class="form-control">
+                        </div>
+                        <div class="input-group mb-3 input-group-sm">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Стоит посетить</span>
+                            </div>
+                            <input type="text" name="recommendToVisit" class="form-control">
+                        </div>
+                        <div class="input-group mb-3 input-group-sm">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Негативные отзывы</span>
+                            </div>
+                            <input type="text" name="notRecommendToVisit" class="form-control">
+                        </div>
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                            <button class="btn btn-outline-success p-2" type="submit">Сохранить</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>

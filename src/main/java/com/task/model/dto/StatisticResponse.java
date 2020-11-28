@@ -8,7 +8,9 @@ import java.io.Serializable;
 public class StatisticResponse implements Serializable {
     private Long id;
 
-    private Integer amount;
+    private Integer day;
+
+    private Long amount;
 
     private Boolean isQuarantineNeeded;
 

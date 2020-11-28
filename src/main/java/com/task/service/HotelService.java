@@ -36,6 +36,7 @@ public class HotelService {
         Hotel hotel = Hotel.builder()
                 .amountOfStars(hotelRequest.getStars())
                 .name(hotelRequest.getName())
+                .cost(hotelRequest.getCost())
                 .city(city)
                 .build();
 
@@ -46,7 +47,8 @@ public class HotelService {
     @Transactional
     public void update(UpdateHotelRequest updateHotelRequest) {
         hotelRepository.findById(updateHotelRequest.getId()).ifPresent(hotel ->
-                hotelRepository.updateNameAndStars(hotel.getId(), updateHotelRequest.getName(), updateHotelRequest.getStars()));
+                hotelRepository.updateNameAndStars(hotel.getId(), updateHotelRequest.getName(),
+                        updateHotelRequest.getStars(), updateHotelRequest.getCost()));
     }
 
     public void delete(Long id) {

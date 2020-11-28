@@ -12,6 +12,8 @@ public class HotelResponse implements Serializable {
     @JsonProperty("stars")
     private Integer amountOfStars;
 
+    private String cost;
+    
     private String name;
 
     @JsonProperty("city_id")

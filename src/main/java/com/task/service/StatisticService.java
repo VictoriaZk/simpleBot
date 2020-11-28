@@ -1,6 +1,5 @@
 package com.task.service;
 
-import com.task.exception.ObjectNotFoundException;
 import com.task.mapper.StatisticMapper;
 import com.task.model.Country;
 import com.task.model.Statistic;
@@ -35,6 +34,7 @@ public class StatisticService {
 
         Statistic statistic = Statistic.builder()
                 .amount(createStatisticRequest.getAmount())
+                .day(createStatisticRequest.getDay())
                 .isQuarantineNeeded(createStatisticRequest.getIsQuarantineNeeded())
                 .country(country)
                 .build();
@@ -46,7 +46,8 @@ public class StatisticService {
     @Transactional
     public void update(UpdateStatisticRequest updateStatisticRequest) {
         statisticRepository.findById(updateStatisticRequest.getId()).ifPresent(statistic ->
-                statisticRepository.updateStatistic(statistic.getId(), updateStatisticRequest.getAmount(), updateStatisticRequest.getIsQuarantineNeeded()));
+                statisticRepository.updateStatistic(statistic.getId(), updateStatisticRequest.getAmount(),
+                        updateStatisticRequest.getDay(), updateStatisticRequest.getIsQuarantineNeeded()));
     }
 
     public void delete(Long id) {
@@ -55,6 +56,6 @@ public class StatisticService {
 
     private Country getByCountryName(String name) {
         return countryRepository.findByName(name)
-                .orElseThrow(() -> new ObjectNotFoundException(String.format("Country %s doesnt't exist", name)));
+                .orElseGet(() -> countryRepository.save(Country.builder().name(name).build()));
     }
 }

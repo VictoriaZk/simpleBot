@@ -17,7 +17,9 @@ public class Statistic {
     @Id
     private Long id;
 
-    private Integer amount;
+    private Long amount;
+
+    private Integer day;
 
     @Column(name = "quarantine")
     private Boolean isQuarantineNeeded;

@@ -19,6 +19,8 @@ public class Hotel {
 
     private String name;
 
+    private String cost;
+
     @Column(name = "stars")
     private Integer amountOfStars;
 

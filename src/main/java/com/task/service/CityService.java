@@ -3,6 +3,7 @@ package com.task.service;
 import com.task.mapper.CityMapper;
 import com.task.model.City;
 import com.task.model.Country;
+import com.task.model.FutureCity;
 import com.task.model.Message;
 import com.task.model.Statistic;
 import com.task.model.dto.CityResponse;
@@ -10,6 +11,7 @@ import com.task.model.dto.CreateCityRequest;
 import com.task.model.dto.UpdateCityRequest;
 import com.task.repository.CityRepository;
 import com.task.repository.CountryRepository;
+import com.task.repository.FutureCityRepository;
 import com.task.repository.StatisticRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -27,6 +29,7 @@ public class CityService {
     private final CountryRepository countryRepository;
     private final CityRepository cityRepository;
     private final StatisticRepository statisticRepository;
+    private final FutureCityRepository futureCityRepository;
     private final CityMapper cityMapper;
 
     public String getInformation(String cityName) {
@@ -34,6 +37,7 @@ public class CityService {
         if (Objects.nonNull(city)) {
             return getMessage(city);
         } else {
+            addToFutureCities(cityName);
             return Message.APOLOGIZE_MESSAGE.getApologizeMessage();
         }
     }
@@ -46,6 +50,8 @@ public class CityService {
 
     public CityResponse create(CreateCityRequest cityRequest) {
         Country country = getCountryByName(cityRequest.getCountry());
+
+        checkingInFutureCities(cityRequest.getName());
 
         City newCity = City.builder()
                 .name(cityRequest.getName())
@@ -103,5 +109,24 @@ public class CityService {
         return city.getName() + "/n" + cityDescription + "/n" + recommend + "/n" + notRecommend + "/n" +
                 "Список отелей, в которых вы можете остановиться" + hotels + "/n" +
                 country + ". " + amount + ". " + quarantine + ". " ;
+    }
+
+    @Transactional
+    public void addToFutureCities(String name) {
+        Optional<FutureCity> city = futureCityRepository.findByName(name);
+        if (city.isPresent()) {
+            Integer amountOfRequests = city.get().getAmountOfRequests();
+            city.get().setAmountOfRequests(++amountOfRequests);
+            futureCityRepository.save(city.get());
+        } else {
+            futureCityRepository.save(FutureCity.builder()
+                    .name(name)
+                    .amountOfRequests(1)
+                    .build());
+        }
+    }
+
+    private void checkingInFutureCities(String name) {
+        futureCityRepository.findByName(name).ifPresent(futureCityRepository::delete);
     }
 }

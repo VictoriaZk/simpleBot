@@ -14,6 +14,9 @@ public class CreateHotelRequest {
     @NotBlank
     private String name;
 
+    @NotBlank
+    private String cost;
+
     @NotNull
     @JsonProperty("city")
     private String city;

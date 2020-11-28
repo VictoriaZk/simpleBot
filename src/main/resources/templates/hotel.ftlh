@@ -17,11 +17,17 @@
         <ul class="navbar-nav">
             <li class="nav-item">
             <li class="nav-item">
-                <a class="nav-link" href="/">Home</a>
+                <a class="nav-link" href="/">Главная</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="https://www.booking.com/">Go to the most popular apartments cite Booking.com</a>
-            </li>
+            <a class="navbar-brand" href="https://www.booking.com/">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Eo_circle_blue_letter-b.svg/1200px-Eo_circle_blue_letter-b.svg.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                Booking.com
+            </a>
+
+            <a class="navbar-brand" href="https://www.airbnb.com/">
+                <img src="https://image.freepik.com/free-vector/letter-logo-design-template_23987-86.jpg" width="30" height="30" class="d-inline-block align-top" alt="">
+                Airbnb.com
+            </a>
         </ul>
     </div>
 </nav>
@@ -30,10 +36,11 @@
     <table class="table table-hover table-light">
         <thead class="thead-dark">
         <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Stars</th>
-            <th scope="col">City</th>
-            <th scope="col">Action</th>
+            <th scope="col">Название</th>
+            <th scope="col">Количество звезд</th>
+            <th scope="col">Цена за сутки</th>
+            <th scope="col">Город</th>
+            <th scope="col">Выполнить</th>
         </tr>
         </thead>
         <tbody>
@@ -41,55 +48,10 @@
             <tr class="text-left">
                 <td>${hotel.name}</td>
                 <td>${hotel.amountOfStars}</td>
+                <td>${hotel.cost}</td>
                 <td>${hotel.city.name}</td>
                 <td>
-                    <a class="badge badge-info" data-toggle="modal" data-target="#myModal">Add</a>
-                    <!-- The Modal -->
-                    <form action="/hotels/add" method="post">
-                        <div class="modal fade" id="myModal">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-
-                                    <!-- Modal Header -->
-                                    <div class="modal-header">
-                                        <h4 class="modal-title">Adding</h4>
-                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    </div>
-
-                                    <!-- Modal body -->
-                                    <div class="modal-body">
-                                        <form>
-                                            <div class="input-group mb-3 input-group-sm">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text">Name</span>
-                                                </div>
-                                                <input type="text" name="name" class="form-control">
-                                            </div>
-                                            <div class="input-group mb-3 input-group-sm">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text">Stars</span>
-                                                </div>
-                                                <input type="number" name="stars" class="form-control">
-                                            </div>
-                                            <div class="input-group mb-3 input-group-sm">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text">City</span>
-                                                </div>
-                                                <input type="text" name="city" class="form-control">
-                                            </div>
-                                        </form>
-                                    </div>
-
-                                    <!-- Modal footer -->
-                                    <div class="modal-footer">
-                                        <button class="btn btn-outline-success p-2" type="submit">Save</button>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                    <a class="badge badge-success" data-toggle="modal" data-target="#update${hotel.id}">Update</a>
+                    <a class="badge badge-success" data-toggle="modal" data-target="#update${hotel.id}">Обновить</a>
                     <!-- The Modal -->
                     <form action="/hotels/update/${hotel.id}" method="post">
                         <div class="modal fade" id="update${hotel.id}">
@@ -98,7 +60,7 @@
 
                                     <!-- Modal Header -->
                                     <div class="modal-header">
-                                        <h4 class="modal-title">Updating</h4>
+                                        <h4 class="modal-title">Обновление</h4>
                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                                     </div>
 
@@ -107,16 +69,23 @@
                                         <form>
                                             <div class="input-group mb-3 input-group-sm">
                                                 <div class="input-group-prepend">
-                                                    <span class="input-group-text">Name</span>
+                                                    <span class="input-group-text">Название</span>
                                                 </div>
                                                 <input type="text" name="name" value="${hotel.name}"
                                                        class="form-control">
                                             </div>
                                             <div class="input-group mb-3 input-group-sm">
                                                 <div class="input-group-prepend">
-                                                    <span class="input-group-text">Stars</span>
+                                                    <span class="input-group-text">Количество звезд</span>
                                                 </div>
                                                 <input type="number" name="stars" value="${hotel.amountOfStars}"
+                                                       class="form-control">
+                                            </div>
+                                            <div class="input-group mb-3 input-group-sm">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">Цена за сутки</span>
+                                                </div>
+                                                <input type="number" name="cost" value="${hotel.cost}"
                                                        class="form-control">
                                             </div>
                                         </form>
@@ -124,19 +93,71 @@
 
                                     <!-- Modal footer -->
                                     <div class="modal-footer">
-                                        <button class="btn btn-outline-success p-2" type="submit">Update</button>
+                                        <button class="btn btn-outline-success p-2" type="submit">Сохранить</button>
                                     </div>
 
                                 </div>
                             </div>
                         </div>
                     </form>
-                    <a href="/hotels/delete/${hotel.id}" class="badge badge-danger">Delete</a>
+                    <a href="/hotels/delete/${hotel.id}" class="badge badge-danger">Удалить</a>
                 </td>
             </tr>
         </#list>
         </tbody>
     </table>
+    <a class="btn btn-default btn-lg btn-block" data-toggle="modal" data-target="#myModal">Добавить новый отель</a>
+    <!-- The Modal -->
+    <form action="/hotels/add" method="post">
+        <div class="modal fade" id="myModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Добавление</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <form>
+                            <div class="input-group mb-3 input-group-sm">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Название</span>
+                                </div>
+                                <input type="text" name="name" class="form-control">
+                            </div>
+                            <div class="input-group mb-3 input-group-sm">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Количество звезд</span>
+                                </div>
+                                <input type="number" name="stars" class="form-control">
+                            </div>
+                            <div class="input-group mb-3 input-group-sm">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Цена за сутки</span>
+                                </div>
+                                <input type="number" name="cost" class="form-control">
+                            </div>
+                            <div class="input-group mb-3 input-group-sm">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Город</span>
+                                </div>
+                                <input type="text" name="city" class="form-control">
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button class="btn btn-outline-success p-2" type="submit">Сохранить</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </form>
 </div>
 </body>
 </html>

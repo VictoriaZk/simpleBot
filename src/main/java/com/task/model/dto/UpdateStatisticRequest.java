@@ -6,7 +6,9 @@ import lombok.Data;
 public class UpdateStatisticRequest {
     private Long id;
 
-    private Integer amount;
+    private Integer day;
+
+    private Long amount;
 
     private Boolean isQuarantineNeeded;
 

@@ -5,6 +5,7 @@ import com.task.model.dto.CreateCityRequest;
 import com.task.model.dto.UpdateCityRequest;
 import com.task.model.dto.UpdateCountryRequest;
 import com.task.service.CityService;
+import com.task.service.FutureCityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,11 +17,13 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @RequestMapping(value = "/cities")
 public class CityController {
+    private final FutureCityService futureCityService;
     private final CityService cityService;
 
     @GetMapping
     public String getAll(Model model) {
         model.addAttribute("cities", cityService.getAll());
+        model.addAttribute("plans", futureCityService.getAll());
         return "city";
     }
 

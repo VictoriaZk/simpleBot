@@ -17,11 +17,12 @@
         <ul class="navbar-nav">
             <li class="nav-item">
             <li class="nav-item">
-                <a class="nav-link" href="/">Home</a>
+                <a class="nav-link" href="/">Главная</a>
             </li>
-            <li class="nav-item">
-            <a class="nav-link" href="https://coronavirus-monitor.info/">Statistic of Covid-19 in real time</a>
-            </li>
+            <a class="navbar-brand" href="https://coronavirus-monitor.info/">
+                <img src="https://www.flaticon.com/svg/static/icons/svg/2760/2760147.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+                Covid-19 - режим реального времени
+            </a>
         </ul>
     </div>
 </nav>
@@ -30,71 +31,20 @@
     <table class="table table-hover table-light">
         <thead class="thead-dark">
         <tr>
-            <th scope="col">Amount of infected</th>
-            <th scope="col">Need quarantine</th>
-            <th scope="col">Country</th>
-            <th scope="col">Action</th>
+            <th scope="col">Количество зараженных</th>
+            <th scope="col">Необходимость карантина по приезду</th>
+            <th scope="col">Страна</th>
+            <th scope="col">Выполнить</th>
         </tr>
         </thead>
         <tbody>
         <#list statistics as statistic>
             <tr class="text-left">
-                <td>${statistic.amount}</td>
+                <td>${statistic.amount} <p style="color:Red">(+${statistic.day})</p></td>
                 <td>${statistic.isQuarantineNeeded?c}</td>
                 <td>${statistic.country.name}</td>
                 <td>
-                    <a class="badge badge-info" data-toggle="modal" data-target="#myModal">Add</a>
-                    <!-- The Modal -->
-                    <form action="/statistics/add" method="post">
-                        <div class="modal fade" id="myModal">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-
-                                    <!-- Modal Header -->
-                                    <div class="modal-header">
-                                        <h4 class="modal-title">Adding</h4>
-                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    </div>
-
-                                    <!-- Modal body -->
-                                    <div class="modal-body">
-                                        <form>
-                                            <div class="input-group mb-3 input-group-sm">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text">Country</span>
-                                                </div>
-                                                <input type="text" name="country" class="form-control">
-                                            </div>
-                                            <div class="input-group mb-3 input-group-sm">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text">Amount</span>
-                                                </div>
-                                                <input type="number" name="amount" class="form-control">
-                                            </div>
-                                            <div class="input-group mb-3 input-group-sm">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text">Quarantine</span>
-                                                </div>
-                                                <form>
-                                                    <select name="isQuarantineNeeded" class="custom-select mb-1">
-                                                        <option selected value="false">No</option>
-                                                        <option value="true">Yes</option>
-                                                    </select>
-                                                </form>
-                                            </div>
-                                        </form>
-                                    </div>
-
-                                    <!-- Modal footer -->
-                                    <div class="modal-footer">
-                                        <button class="btn btn-outline-success p-2" type="submit">Save</button>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                    <a class="badge badge-success" data-toggle="modal" data-target="#update${statistic.id}">Update</a>
+                    <a class="badge badge-success" data-toggle="modal" data-target="#update${statistic.id}">Обновить</a>
                     <!-- The Modal -->
                     <form action="/statistics/update/${statistic.id}" method="post">
                         <div class="modal fade" id="update${statistic.id}">
@@ -103,7 +53,7 @@
 
                                     <!-- Modal Header -->
                                     <div class="modal-header">
-                                        <h4 class="modal-title">Updating</h4>
+                                        <h4 class="modal-title">Обновление</h4>
                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                                     </div>
 
@@ -112,19 +62,26 @@
                                         <form>
                                             <div class="input-group mb-3 input-group-sm">
                                                 <div class="input-group-prepend">
-                                                    <span class="input-group-text">Amount</span>
+                                                    <span class="input-group-text">Количество зараженных за все время</span>
                                                 </div>
                                                 <input type="number" name="amount" value="${statistic.amount}"
                                                        class="form-control">
                                             </div>
                                             <div class="input-group mb-3 input-group-sm">
                                                 <div class="input-group-prepend">
-                                                    <span class="input-group-text">Quarantine</span>
+                                                    <span class="input-group-text">Количество зараженных за сутки</span>
+                                                </div>
+                                                <input type="number" name="day" value="${statistic.day}"
+                                                       class="form-control">
+                                            </div>
+                                            <div class="input-group mb-3 input-group-sm">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">Необходимость карантина</span>
                                                 </div>
                                                 <form>
                                                     <select name="isQuarantineNeeded" class="custom-select mb-1">
-                                                        <option selected value="false">No</option>
-                                                        <option value="true">Yes</option>
+                                                        <option selected value="false">Нет</option>
+                                                        <option value="true">Да</option>
                                                     </select>
                                                 </form>
                                             </div>
@@ -133,19 +90,75 @@
 
                                     <!-- Modal footer -->
                                     <div class="modal-footer">
-                                        <button type="submit" class="btn btn-outline-success p-2">Update</button>
+                                        <button type="submit" class="btn btn-outline-success p-2">Сохранить</button>
                                     </div>
 
                                 </div>
                             </div>
                         </div>
                     </form>
-                    <a href="/statistics/delete/${statistic.id}" class="badge badge-danger">Delete</a>
+                    <a href="/statistics/delete/${statistic.id}" class="badge badge-danger">Удалить</a>
                 </td>
             </tr>
         </#list>
         </tbody>
     </table>
+    <a class="btn btn-default btn-lg btn-block" data-toggle="modal" data-target="#myModal">Добавить новую статистику</a>
+    <!-- The Modal -->
+    <form action="/statistics/add" method="post">
+        <div class="modal fade" id="myModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Добавление</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <form>
+                            <div class="input-group mb-3 input-group-sm">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Страна</span>
+                                </div>
+                                <input type="text" name="country" class="form-control">
+                            </div>
+                            <div class="input-group mb-3 input-group-sm">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Количество зараженных за все время</span>
+                                </div>
+                                <input type="number" name="amount" class="form-control">
+                            </div>
+                            <div class="input-group mb-3 input-group-sm">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Количество зараженных за сутки</span>
+                                </div>
+                                <input type="number" name="day" class="form-control">
+                            </div>
+                            <div class="input-group mb-3 input-group-sm">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Необходимость карантина</span>
+                                </div>
+                                <form>
+                                    <select name="isQuarantineNeeded" class="custom-select mb-1">
+                                        <option selected value="false">Нет</option>
+                                        <option value="true">Да</option>
+                                    </select>
+                                </form>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button class="btn btn-outline-success p-2" type="submit">Сохранить</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
 </div>
 </body>
 </html>
