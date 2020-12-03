@@ -20,24 +20,25 @@
                 <a class="nav-link" href="/">Главная</a>
             </li>
         </ul>
-        <a class="nav-link" data-toggle="modal" data-target="#plan">Пожелания пользователей</a>
+        <a class="nav-link" style = "padding-left: 35vw; color: lightgrey" data-toggle="modal" data-target="#plan">Пожелания пользователей</a>
         <div class="modal fade" id="plan">
             <div class="modal-dialog">
                 <div class="modal-content">
 
                     <!-- Modal Header -->
-                    <div class="modal-header">
-                        <h4 class="modal-title">Список городов</h4>
+                    <div class="modal-header" >
+                        <h4 class="modal-title" style = "padding-left: 10vw">Список городов</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
 
                     <!-- Modal body -->
                     <div class="modal-body">
-                        <table class="table table-hover table-light">
-                            <thead class="thead-dark">
+                        <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                        <table class="table table-hover table-info">
+                            <thead class="thead-light">
                             <tr>
                                 <th scope="col">Название</th>
-                                <th scope="col">Количество запросов пользователей</th>
+                                <th scope="col">Частота запросов пользователей</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -49,6 +50,7 @@
                         </#list>
                             </tbody>
                         </table>
+                        </div>
                     </div>
                 </div>
             </div>

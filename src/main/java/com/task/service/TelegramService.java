@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.Voice;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
@@ -36,6 +37,16 @@ public class TelegramService {
 
             try {
                 travelBot.execute(new SendMessage(chatId, cityDescription));
+            } catch (TelegramApiException e) {
+                e.printStackTrace();
+            }
+        } else if(update.getMessage().getText().equals("/photo")) {
+            SendPhoto msg = new SendPhoto()
+                    .setChatId(update.getMessage().getChatId())
+                    .setPhoto("https://sun2.velcom-by-minsk.userapi.com/impf/c851420/v851420781/19b13e/FUdfnxqidhI.jpg?size=960x1150&quality=96&proxy=1&sign=c3e0b97eac3ac7e9636023cd13185f4e")
+                    .setCaption("Photo");
+            try {
+                travelBot.execute(msg); // Call method to send the photo
             } catch (TelegramApiException e) {
                 e.printStackTrace();
             }

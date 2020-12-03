@@ -86,8 +86,8 @@ public class CityService {
         String amount = "";
         String quarantine = "";
         String cityDescription = city.getDescription();
-        String recommend = "Некоторые факты и рекомендации: " + city.getRecommendToVisit();
-        String notRecommend = "Также мы собрали негативные отзывы о некоторых местах: " + city.getNotRecommendToVisit();
+        String recommend = "Что стоит посетить: " + city.getRecommendToVisit();
+        String notRecommend = "Не стоит тратить время на посещение: " + city.getNotRecommendToVisit();
         List<String> hotels = new ArrayList<>();
 
         city.getHotels().forEach(hotel -> {

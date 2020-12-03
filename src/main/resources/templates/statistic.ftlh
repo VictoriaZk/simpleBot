@@ -19,7 +19,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="/">Главная</a>
             </li>
-            <a class="navbar-brand" href="https://coronavirus-monitor.info/">
+            <a class="navbar-brand" style = "padding-left: 30vw" href="https://coronavirus-monitor.info/">
                 <img src="https://www.flaticon.com/svg/static/icons/svg/2760/2760147.svg" width="30" height="30" class="d-inline-block align-top" alt="">
                 Covid-19 - режим реального времени
             </a>
@@ -41,7 +41,11 @@
         <#list statistics as statistic>
             <tr class="text-left">
                 <td>${statistic.amount} <p style="color:Red">(+${statistic.day})</p></td>
-                <td>${statistic.isQuarantineNeeded?c}</td>
+                <#if statistic.isQuarantineNeeded>
+                    <td style="color: red; padding-left: 7vw">Карантин обязателен</td>
+                <#else>
+                    <td style="color: green; padding-left: 7vw">Карантин не нужен</td>
+                </#if>
                 <td>${statistic.country.name}</td>
                 <td>
                     <a class="badge badge-success" data-toggle="modal" data-target="#update${statistic.id}">Обновить</a>
@@ -64,14 +68,14 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text">Количество зараженных за все время</span>
                                                 </div>
-                                                <input type="number" name="amount" value="${statistic.amount}"
+                                                <input type="number" name="amount" min="0" value="${statistic.amount}"
                                                        class="form-control">
                                             </div>
                                             <div class="input-group mb-3 input-group-sm">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text">Количество зараженных за сутки</span>
                                                 </div>
-                                                <input type="number" name="day" value="${statistic.day}"
+                                                <input type="number" name="day" min="0" value="${statistic.day}"
                                                        class="form-control">
                                             </div>
                                             <div class="input-group mb-3 input-group-sm">
@@ -129,13 +133,13 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Количество зараженных за все время</span>
                                 </div>
-                                <input type="number" name="amount" class="form-control">
+                                <input type="number" name="amount" min="0" class="form-control">
                             </div>
                             <div class="input-group mb-3 input-group-sm">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Количество зараженных за сутки</span>
                                 </div>
-                                <input type="number" name="day" class="form-control">
+                                <input type="number" name="day" min="0" class="form-control">
                             </div>
                             <div class="input-group mb-3 input-group-sm">
                                 <div class="input-group-prepend">

@@ -11,7 +11,7 @@
 
 </head>
 <body>
-<div class="jumbotron text-center">
+<div class="text-center">
     <h1 style="color:Gray">Путешествия</h1>
     <div class="container-fluid">
         <div class="d-flex justify-content-center mt-5">
@@ -21,7 +21,7 @@
             <a href="/statistics" class="btn-outline-secondary btn m-2">Статистика</a>
         </div>
     </div>
-    <div id="demo" class="carousel slide" data-ride="carousel">
+    <div id="demo" class="carousel slide" data-ride="carousel" style="height: 60vh; overflow: hidden;">
 
         <!-- Indicators -->
         <ul class="carousel-indicators">

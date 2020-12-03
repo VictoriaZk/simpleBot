@@ -19,12 +19,12 @@
             <li class="nav-item">
                 <a class="nav-link" href="/">Главная</a>
             </li>
-            <a class="navbar-brand" href="https://www.booking.com/">
+            <a class="navbar-brand" style = "padding-left: 30vw" href="https://www.booking.com/">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Eo_circle_blue_letter-b.svg/1200px-Eo_circle_blue_letter-b.svg.png" width="30" height="30" class="d-inline-block align-top" alt="">
                 Booking.com
             </a>
 
-            <a class="navbar-brand" href="https://www.airbnb.com/">
+            <a class="navbar-brand" style = "padding-left: 3vw" href="https://www.airbnb.com/">
                 <img src="https://image.freepik.com/free-vector/letter-logo-design-template_23987-86.jpg" width="30" height="30" class="d-inline-block align-top" alt="">
                 Airbnb.com
             </a>
@@ -78,14 +78,14 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text">Количество звезд</span>
                                                 </div>
-                                                <input type="number" name="stars" value="${hotel.amountOfStars}"
+                                                <input type="number" name="stars" min="1" max="5" value="${hotel.amountOfStars}"
                                                        class="form-control">
                                             </div>
                                             <div class="input-group mb-3 input-group-sm">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text">Цена за сутки</span>
                                                 </div>
-                                                <input type="number" name="cost" value="${hotel.cost}"
+                                                <input type="number" name="cost" min="1" value="${hotel.cost}"
                                                        class="form-control">
                                             </div>
                                         </form>
@@ -132,13 +132,13 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Количество звезд</span>
                                 </div>
-                                <input type="number" name="stars" class="form-control">
+                                <input type="number" name="stars" min="1" max="5" class="form-control">
                             </div>
                             <div class="input-group mb-3 input-group-sm">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Цена за сутки</span>
                                 </div>
-                                <input type="number" name="cost" class="form-control">
+                                <input type="number" name="cost" min="1" class="form-control">
                             </div>
                             <div class="input-group mb-3 input-group-sm">
                                 <div class="input-group-prepend">
