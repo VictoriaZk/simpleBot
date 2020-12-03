@@ -1,28 +1,28 @@
 server:
-  port: 5000
-
+  port: 4000
 
 spring:
-  freemarker:
-    expose-request-attributes: true
 
   jpa:
     generate-ddl: true
     hibernate:
       ddl-auto: update
-    database: mysql
+      jdbc.lob.non_contextual_creation: true
 
   datasource:
-    url: jdbc:mysql://localhost:3306/telegram
+    url: jdbc:mysql://localhost:3306/telegram?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
     username: root
-    password: root
+    password: 123
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   telegrambot:
     botUserName: '@travel1ing_bot'
     botToken: 1383524175:AAGWhBL6RMB3XXhPCMCsCC5PAH2pQoKa13A
-    webHookPath:  https://eab0e81440d6.ngrok.io
+    webHookPath: https://7ca979679655.ngrok.io
 
     proxyType: SOCKS5
     proxyHost: localhost
     proxyPort: 9150
+
+spring.cloud.gcp.project-id: eminent-parsec-296820
+spring.cloud.gcp.credentials.location: file:D:\sshkey\google-key.json

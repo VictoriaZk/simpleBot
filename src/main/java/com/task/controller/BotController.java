@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
+import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
 
 @Controller
@@ -21,7 +22,7 @@ public class BotController {
     private final TelegramService telegramService;
 
     @PostMapping
-    public ResponseEntity<?> onUpdateReceived(@RequestBody Update update) throws TelegramApiException, IOException {
+    public ResponseEntity<?> onUpdateReceived(@RequestBody Update update) throws TelegramApiException, IOException, UnsupportedAudioFileException {
         telegramService.onWebhookUpdateReceived(update);
         return ResponseEntity.ok(HttpStatus.NO_CONTENT);
     }
