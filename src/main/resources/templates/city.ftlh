@@ -32,7 +32,7 @@
             </li>
         </ul>
         <a class="nav-link" style = "padding-left: 35vw; color: lightgrey" data-toggle="modal" data-target="#plan">Пожелания пользователей</a>
-        <div class="modal fade" id="plan">
+        <div class="modal" id="plan">
             <div class="modal-dialog">
                 <div class="modal-content">
 
@@ -70,7 +70,7 @@
 </nav>
 <br>
 <div class="container">
-    <table id="example" class="table table-striped table-bordered table-hover table-light" style="text-align: center">
+    <table id="example" class="col-md-12 table table-striped table-bordered table-hover table-light table-responsive" style="text-align: center !important;">
         <thead class="thead-dark">
         <tr>
             <th scope="col">Название</th>
@@ -92,7 +92,7 @@
                 <td>
                     <a class="badge badge-success" data-toggle="modal" data-target="#reduct${city.id}">Обновить</a>
                     <!-- The Modal -->
-                    <div class="modal fade" id="reduct${city.id}">
+                    <div class="modal" id="reduct${city.id}">
                         <div class="modal-dialog">
                             <div class="modal-content">
 
@@ -152,7 +152,7 @@
     </table>
     <a class="btn btn-default btn-lg btn-block" data-toggle="modal" data-target="#myModal">Добавить новый город</a>
     <!-- The Modal -->
-    <div class="modal fade" id="myModal">
+    <div class="modal" id="myModal">
         <div class="modal-dialog">
             <div class="modal-content">
 
@@ -208,8 +208,13 @@
 </body>
 <script>
     $(document).ready(function() {
-        debugger;
         $('#example').DataTable();
     } );
 </script>
+<style>
+    .table th {
+        width: 400px !important;
+        text-align: center;
+    }
+</style>
 </html>

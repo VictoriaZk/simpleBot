@@ -2,6 +2,7 @@ package com.task.service;
 
 import com.task.model.Message;
 import com.task.model.TravelBot;
+import com.task.model.dto.ImageResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.send.SendMediaGroup;
@@ -61,18 +62,23 @@ public class TelegramService {
 
                 SendMediaGroup sendMediaGroup = new SendMediaGroup().setChatId(message.getChatId());
 
-                List<InputMedia> collect = imageService.getImagesByCity(textMessage).stream().map(imageResponse -> {
-                    if(imageResponse.getIsVideo()){
-                        return new InputMediaPhoto(imageResponse.getUrl(), imageResponse.getCity().getName());
-                    }else {
+                List<InputMedia> collect = imageService.getImagesByCity(textMessage).stream()
+                        .filter(imageResponse -> !imageResponse.getIsVideo()).map(imageResponse -> {
                         return new InputMediaPhoto()
                                 .setMedia(imageResponse.getUrl());
-                    }
                 }).collect(Collectors.toList());
-
 
                 sendMediaGroup.setMedia(collect);
                 travelBot.execute(sendMediaGroup);
+
+                imageService.getImagesByCity(textMessage).stream()
+                        .filter(ImageResponse::getIsVideo).forEach(imageResponse -> {
+                    try {
+                        travelBot.execute(new SendMessage(message.getChatId(), imageResponse.getUrl()));
+                    } catch (TelegramApiException e) {
+                        e.printStackTrace();
+                    }
+                });
 
             } catch (TelegramApiException e) {
                 e.printStackTrace();

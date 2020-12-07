@@ -7,6 +7,10 @@
     <script src="/webjars/momentjs/2.24.0/moment.js"></script>
     <link href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"/>
     <script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap.min.css" rel="stylesheet"/>
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap.min.js"></script>
 </head>
 <body>
 <nav class="navbar navbar-expand-md bg-dark navbar-dark">
@@ -33,7 +37,7 @@
 </nav>
 <br>
 <div class="container">
-    <table class="table table-hover table-light">
+    <table id="example" class="col-md-12 table table-striped table-bordered table-hover table-light table-responsive" style="text-align: center;">
         <thead class="thead-dark">
         <tr>
             <th scope="col">Название</th>
@@ -56,7 +60,7 @@
                     <a class="badge badge-success" data-toggle="modal" data-target="#update${hotel.id}">Обновить</a>
                     <!-- The Modal -->
                     <form action="/hotels/update/${hotel.id}" method="post">
-                        <div class="modal fade" id="update${hotel.id}">
+                        <div class="modal" id="update${hotel.id}">
                             <div class="modal-dialog">
                                 <div class="modal-content">
 
@@ -117,8 +121,8 @@
     </table>
     <a class="btn btn-default btn-lg btn-block" data-toggle="modal" data-target="#myModal">Добавить новый отель</a>
     <!-- The Modal -->
-    <form action="/hotels/add" method="post">
-        <div class="modal fade" id="myModal">
+        <div class="modal" id="myModal">
+            <form action="/hotels/add" method="post">
             <div class="modal-dialog">
                 <div class="modal-content">
 
@@ -171,8 +175,20 @@
 
                 </div>
             </div>
+            </form>
         </div>
-    </form>
 </div>
 </body>
+<script>
+    $(document).ready(function() {
+        $('#example').DataTable();
+    } );
+</script>
+
+<style>
+    .table th {
+        width: 400px !important;
+        text-align: center;
+    }
+</style>
 </html>

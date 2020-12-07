@@ -1,11 +1,7 @@
 package com.task.service;
 
 import com.task.mapper.CityMapper;
-import com.task.model.City;
-import com.task.model.Country;
-import com.task.model.FutureCity;
-import com.task.model.Message;
-import com.task.model.Statistic;
+import com.task.model.*;
 import com.task.model.dto.CityResponse;
 import com.task.model.dto.CreateCityRequest;
 import com.task.model.dto.UpdateCityRequest;
@@ -18,7 +14,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;

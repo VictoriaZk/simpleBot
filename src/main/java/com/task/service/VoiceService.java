@@ -65,7 +65,8 @@ public class VoiceService {
     }
 
     private InputStream getTelegramAudioStream(Voice voice) throws IOException {
-        URL url = new URL("https://api.telegram.org/bot" + travelBot.getBotToken() + "/getFile?file_id=" + voice.getFileId());
+        URL url = new URL("https://api.telegram.org/bot" + travelBot.getBotToken()
+                + "/getFile?file_id=" + voice.getFileId());
         BufferedReader bf = new BufferedReader(new InputStreamReader(url.openStream()));
         String getFileResponse = bf.readLine();
 

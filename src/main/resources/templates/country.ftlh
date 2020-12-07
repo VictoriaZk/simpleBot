@@ -113,4 +113,14 @@
     </form>
 </div>
 </body>
+<style>
+    .table td {
+
+        text-align: center;
+    }
+
+    .table th {
+        text-align: center;
+    }
+</style>
 </html>

@@ -165,4 +165,9 @@
     </form>
 </div>
 </body>
+<style>
+    .table td {
+        text-align: center;
+    }
+</style>
 </html>
