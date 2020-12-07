@@ -68,8 +68,11 @@ public class TelegramService {
                                 .setMedia(imageResponse.getUrl());
                 }).collect(Collectors.toList());
 
-                sendMediaGroup.setMedia(collect);
-                travelBot.execute(sendMediaGroup);
+                if(collect.size() > 0){
+                    sendMediaGroup.setMedia(collect);
+                    travelBot.execute(sendMediaGroup);
+                }
+
 
                 imageService.getImagesByCity(textMessage).stream()
                         .filter(ImageResponse::getIsVideo).forEach(imageResponse -> {
