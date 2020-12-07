@@ -20,4 +20,7 @@ public class CreateHotelRequest {
     @NotNull
     @JsonProperty("city")
     private String city;
+
+    @NotNull
+    private Double rating;
 }

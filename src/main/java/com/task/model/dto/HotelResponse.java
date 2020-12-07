@@ -18,4 +18,6 @@ public class HotelResponse implements Serializable {
 
     @JsonProperty("city_id")
     private CityResponse city;
+
+    private Double rating;
 }

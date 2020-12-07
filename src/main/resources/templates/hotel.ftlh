@@ -40,6 +40,7 @@
             <th scope="col">Количество звезд</th>
             <th scope="col">Цена за сутки</th>
             <th scope="col">Город</th>
+            <th scope="col">Рейтинг</th>
             <th scope="col">Выполнить</th>
         </tr>
         </thead>
@@ -50,6 +51,7 @@
                 <td>${hotel.amountOfStars}</td>
                 <td>${hotel.cost}</td>
                 <td>${hotel.city.name}</td>
+                <td>${hotel.rating}</td>
                 <td>
                     <a class="badge badge-success" data-toggle="modal" data-target="#update${hotel.id}">Обновить</a>
                     <!-- The Modal -->
@@ -85,7 +87,14 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text">Цена за сутки</span>
                                                 </div>
-                                                <input type="number" name="cost" min="1" value="${hotel.cost}"
+                                                <input type="text" name="cost" value="${hotel.cost}"
+                                                       class="form-control">
+                                            </div>
+                                            <div class="input-group mb-3 input-group-sm">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">Рейтинг</span>
+                                                </div>
+                                                <input type="number" min="1" name="rating" value="${hotel.rating}"
                                                        class="form-control">
                                             </div>
                                         </form>
@@ -138,13 +147,19 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Цена за сутки</span>
                                 </div>
-                                <input type="number" name="cost" min="1" class="form-control">
+                                <input type="text" name="cost" class="form-control">
                             </div>
                             <div class="input-group mb-3 input-group-sm">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Город</span>
                                 </div>
                                 <input type="text" name="city" class="form-control">
+                            </div>
+                            <div class="input-group mb-3 input-group-sm">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Рейтинг</span>
+                                </div>
+                                <input type="number" name="rating" class="form-control">
                             </div>
                         </form>
                     </div>

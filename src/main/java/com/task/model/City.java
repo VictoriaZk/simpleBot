@@ -38,4 +38,7 @@ public class City {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "city")
     private Set<Hotel> hotels;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "city")
+    private Set<Image> images;
 }

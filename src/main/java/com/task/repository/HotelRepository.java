@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface HotelRepository extends JpaRepository<Hotel, Long> {
     @Modifying
-    @Query("UPDATE Hotel c SET c.name = ?2, c.amountOfStars = ?3, c.cost = ?4 WHERE c.id = ?1")
-    void updateNameAndStars(Long id, String name, Integer stars, String cost);
+    @Query("UPDATE Hotel c SET c.name = ?2, c.amountOfStars = ?3, c.cost = ?4, c.rating = ?5 WHERE c.id = ?1")
+    void updateNameAndStars(Long id, String name, Integer stars, String cost, Double rating);
 }

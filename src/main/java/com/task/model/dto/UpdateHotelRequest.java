@@ -11,4 +11,6 @@ public class UpdateHotelRequest {
     private Integer stars;
 
     private String name;
+
+    private Double rating;
 }

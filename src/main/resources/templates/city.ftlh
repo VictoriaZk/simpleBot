@@ -7,6 +7,17 @@
     <script src="/webjars/momentjs/2.24.0/moment.js"></script>
     <link href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"/>
     <script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap.min.css" rel="stylesheet"/>
+
+
+
+
+
+
 </head>
 <body>
 <nav class="navbar navbar-expand-md bg-dark navbar-dark">
@@ -59,7 +70,7 @@
 </nav>
 <br>
 <div class="container">
-    <table class="table table-hover table-light">
+    <table id="example" class="table table-striped table-bordered table-hover table-light" style="text-align: center">
         <thead class="thead-dark">
         <tr>
             <th scope="col">Название</th>
@@ -195,4 +206,10 @@
     </div>
 </div>
 </body>
+<script>
+    $(document).ready(function() {
+        debugger;
+        $('#example').DataTable();
+    } );
+</script>
 </html>

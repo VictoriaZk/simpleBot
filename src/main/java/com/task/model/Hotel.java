@@ -27,4 +27,6 @@ public class Hotel {
     @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "cityId")
     private City city;
+
+    private Double rating;
 }

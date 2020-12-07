@@ -38,6 +38,7 @@ public class HotelService {
                 .name(hotelRequest.getName())
                 .cost(hotelRequest.getCost())
                 .city(city)
+                .rating(hotelRequest.getRating())
                 .build();
 
         hotelRepository.save(hotel);
@@ -48,7 +49,7 @@ public class HotelService {
     public void update(UpdateHotelRequest updateHotelRequest) {
         hotelRepository.findById(updateHotelRequest.getId()).ifPresent(hotel ->
                 hotelRepository.updateNameAndStars(hotel.getId(), updateHotelRequest.getName(),
-                        updateHotelRequest.getStars(), updateHotelRequest.getCost()));
+                        updateHotelRequest.getStars(), updateHotelRequest.getCost(), updateHotelRequest.getRating()));
     }
 
     public void delete(Long id) {

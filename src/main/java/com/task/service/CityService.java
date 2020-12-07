@@ -13,10 +13,12 @@ import com.task.repository.CityRepository;
 import com.task.repository.CountryRepository;
 import com.task.repository.FutureCityRepository;
 import com.task.repository.StatisticRepository;
+import com.vdurmont.emoji.EmojiParser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -86,29 +88,40 @@ public class CityService {
         String amount = "";
         String quarantine = "";
         String cityDescription = city.getDescription();
-        String recommend = "Что стоит посетить: " + city.getRecommendToVisit();
-        String notRecommend = "Не стоит тратить время на посещение: " + city.getNotRecommendToVisit();
+        String recommend = "Что стоит посетить:" + EmojiParser.parseToUnicode(":statue_of_liberty:") +
+                EmojiParser.parseToUnicode(":ferris_wheel:") + EmojiParser.parseToUnicode(":european_castle:") +
+                EmojiParser.parseToUnicode(":violin:") + "\n " + city.getRecommendToVisit();
+        String notRecommend = "Не стоит тратить время на посещение:" + EmojiParser.parseToUnicode(":x:")  +
+                EmojiParser.parseToUnicode(":x:")  + EmojiParser.parseToUnicode(":x:")  +
+                "\n " + city.getNotRecommendToVisit();
         List<String> hotels = new ArrayList<>();
 
         city.getHotels().forEach(hotel -> {
-            hotels.add("Отель:" + hotel.getName() + "," + "количество звезд: " + hotel.getAmountOfStars());
+            hotels.add("\n" + EmojiParser.parseToUnicode(":bed:") + "Отель:" + hotel.getName() + "\n"
+                    + EmojiParser.parseToUnicode(":star:") + "Количество звезд: " + hotel.getAmountOfStars() + "\n"
+                    + EmojiParser.parseToUnicode(":dollar:") + "Цена за сутки:" + hotel.getCost() + "\n"
+                    + EmojiParser.parseToUnicode(":white_check_mark:") + "Рейтинг:" + hotel.getRating());
         });
 
         Optional<Statistic> statisticOptional = statisticRepository.findByCountryId(city.getCountry().getId());
 
         if (statisticOptional.isPresent()) {
             Statistic statistic = statisticOptional.get();
-            country = "Город " + city.getName() + "принадлежит стране " + statistic.getCountry().getName();
-            amount = "На данный момент количество зараженных в стране " + statistic.getAmount().toString();
-            quarantine = "По приезду вам " + ((statistic.getIsQuarantineNeeded()) ? "необходимо будет соблюдать 14-дневный карантин."
-                    : "не нужно отбывать карантин, но все же помните о своем здоровье и здоровье окружающих, носите маску!");
+            country = "\nГород " + city.getName() + " принадлежит стране " + statistic.getCountry().getName();
+            amount = "На данный момент количество зараженных в стране " + EmojiParser.parseToUnicode("\ud83e\udda0") + statistic.getAmount().toString();
+            quarantine = "\nПо приезду вам " + ((statistic.getIsQuarantineNeeded()) ? "необходимо будет соблюдать 14-дневный карантин." + EmojiParser.parseToUnicode(":pill:")
+                    : "не нужно отбывать карантин, но все же помните о своем здоровье и здоровье окружающих, носите маску!" + EmojiParser.parseToUnicode(":mask:"));
         }
 
         //отели сделать цену за сутки и сделать через запятую
         //в статистике добавить кол-во зараженных за сутки
-        return city.getName() + "\n" + cityDescription + "\n" + recommend + "\n" + notRecommend + "\n" +
-                "Список отелей, в которых вы можете остановиться: Семашко 5* 30$ сутки, Гродно 4* 20$ сутки, Беларусь 3* 10$ сутки" + "\n" +
-                country + ". " + amount + ". " + quarantine + ". " ;
+        return EmojiParser.parseToUnicode("\u2708\ufe0f") + city.getName() +
+                "\n\n" + cityDescription +
+                "\n\n" + recommend +
+                "\n\n" + notRecommend + "\n" +
+                "\nСписок отелей, в которых вы можете остановиться" + EmojiParser.parseToUnicode(":hotel:") + ":\n" +
+                hotels.stream().collect(Collectors.joining("\n"))  + "\n\n" +
+                country + ". " + amount + ". " + quarantine;
     }
 
     @Transactional

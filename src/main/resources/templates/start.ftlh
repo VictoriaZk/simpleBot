@@ -62,6 +62,11 @@
             <span class="carousel-control-next-icon"></span>
         </a>
     </div>
+    <div class="container-fluid">
+        <div class="d-flex justify-content-center mt-9">
+            <a href="/photos" class="btn btn-outline-secondary m-2">Галерея</a>
+        </div>
+    </div>
 </div>
 </body>
 </html>

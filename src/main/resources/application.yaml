@@ -8,17 +8,18 @@ spring:
     hibernate:
       ddl-auto: update
       jdbc.lob.non_contextual_creation: true
+    database: mysql
 
   datasource:
     url: jdbc:mysql://localhost:3306/telegram?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
     username: root
-    password: 123
+    password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   telegrambot:
     botUserName: '@travel1ing_bot'
     botToken: 1383524175:AAGWhBL6RMB3XXhPCMCsCC5PAH2pQoKa13A
-    webHookPath: https://7ca979679655.ngrok.io
+    webHookPath: https://7b4f1ab7e8a4.ngrok.io
 
     proxyType: SOCKS5
     proxyHost: localhost
